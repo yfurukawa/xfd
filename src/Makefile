@@ -16,7 +16,7 @@ main.o: main.cpp
 	$(CC) $(INCLUDE) $(LIB_DIR) $(OPT) -c main.cpp
 .PHONY: clean
 clean:
-	$(RM) *.o $(TARGET) $(TEST_TARGET) gmon.out *.gc* *.xml *.exe *.txt
+	$(RM) *.o $(TARGET) $(TEST_TARGET) gmon.out *.gc* *.xml *.exe *.txt Fuga.cpp Hoge.cpp
 
 
 TEST_TARGET = a.outTest
