@@ -1,1 +1,1 @@
-SRC = Configurater.cpp 
+SRC = Configurater.cpp FileDAO.cpp IOutputter.cpp

@@ -1,6 +1,6 @@
 CC = g++
 RM = rm -f
-INCLUDE = -I/usr/incude -I/usr/local/include
+INCLUDE = -I/usr/incude -I/usr/local/include -I.
 LIB_DIR = -L/usr/lib64 -L/usr/local/lib64
 LIB = -lpthread
 OPT = -O0 -g3 -Wall -Wnon-virtual-dtor -Woverloaded-virtual -fmessage-length=0 -fprofile-arcs -ftest-coverage
@@ -24,9 +24,10 @@ TEST_INCLUDE = -I../test -I.
 TEST_LIB = -lgtest
 TEST_OPT = -O0 -g3 -Wall -fmessage-length=0 -pg -fprofile-arcs -ftest-coverage
 include testSources.mk
+include testObjects.mk
 
-test: $(SRC:.cpp=.o) $(TEST_SRC:.cpp=.o)
-	$(CC) $(INCLUDE) $(TEST_INCLUDE) $(LIB_DIR) $(TEST_OPT) -o $(TEST_TARGET) $(SRC:.cpp=.o) $(TEST_SRC:.cpp=.o) $(LIB) $(TEST_LIB)
+test: $(SRC:.cpp=.o) $(TEST_OBJ)
+	$(CC) $(INCLUDE) $(TEST_INCLUDE) $(LIB_DIR) $(TEST_OPT) -o $(TEST_TARGET) $(SRC:.cpp=.o) $(TEST_OBJ) $(LIB) $(TEST_LIB)
 
-$(TEST_SRC:.cpp=.o): $(TEST_SRC)
+$(TEST_OBJ): $(TEST_SRC)
 	$(CC) $(INCLUDE) $(TEST_INCLUDE) $(LIB_DIR) $(LIB) $(TEST_LIB) $(TEST_OPT) -c $(TEST_SRC)
