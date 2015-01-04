@@ -29,7 +29,7 @@ TEST_F (ConfiguraterTest, testGetCheckInterval_10) {
 
 TEST_F (ConfiguraterTest, testGetBaseURL) {
   sut = new Configurater("test.conf");
-  EXPECT_EQ("http://localhost:8080/", sut->getBaseURL());
+  EXPECT_EQ("localhost:8080", sut->getBaseURL());
 }
 
 TEST_F (ConfiguraterTest, testGetNumberOfJobs) {

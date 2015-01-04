@@ -2,11 +2,11 @@
 #define NETWORKDAOTEST_H_
 
 #include <gtest/gtest.h>
-#include "NetworkDAO.h"
+#include "mocks/NetworkDAOSpy.h"
 
 class NetworkDAOTest : public ::testing::Test {
 protected:
-	NetworkDAO* sut;
+	NetworkDAOSpy* sut;
 	void SetUp();
 	void TearDown();
 
