@@ -57,7 +57,7 @@ std::string FileDAO::readData(){
 		  return readData;
 		}
 		else {
-		  return "";
+		  return "EOF";
 		}
 	}
 	else {

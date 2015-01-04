@@ -29,7 +29,7 @@ void Configurater::readConfigurationData() {
 
   do {
     readData = fileDao_.readData();
-    if(readData == "") {
+    if(readData == "EOF") {
       break;
     }
     if(!isCommentLine(readData)){
