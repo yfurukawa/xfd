@@ -8,6 +8,7 @@
 #ifndef FILEDAOSPY_H_
 #define FILEDAOSPY_H_
 
+#include <fstream>
 #include "FileDAO.h"
 
 class FileDAOSpy : public FileDAO {

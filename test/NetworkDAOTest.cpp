@@ -1,6 +1,6 @@
 #include "NetworkDAOTest.h"
 
-NetworkDAOTest::NetworkDAOTest() {
+NetworkDAOTest::NetworkDAOTest() : sut(NULL) {
 
 }
 
