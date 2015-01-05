@@ -28,9 +28,18 @@ class NetworkDAO : public IInputter {
     virtual void closeInputter();
     virtual std::string readData();
     virtual bool isExsist ( std::string name );
+    void sendRequest(const std::string& requestMesage);
 
   protected:
     void split(std::string url, char delimiter, std::string& hostName, std::string& port);
+    void prepareSocket();
+    std::string substringHostNameFromconfiguredURL(const std::string& url);
+    int substringPortNumberFromConfiguredURL(const std::string& url);
+    void initializeServerInformation(const std::string& url);
+    bool isSuccessGethostbyname(struct hostent* host);
+    bool isSuccessIPAddressResolution();
+    struct hostent* resolveIPAddressWithHostName(const std::string& url);
+
   private:
 };
 

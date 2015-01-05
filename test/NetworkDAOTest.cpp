@@ -23,8 +23,8 @@ TEST_F (NetworkDAOTest, establishConnection) {
 }
 
 TEST_F (NetworkDAOTest, testNameIsHere_ChangeThis) {
-  sut->openInputter("localhost:8080");
-
+  sut->openInputter("127.0.0.1:8080");
+  sut->sendRequest("GET /job/testJob/lastBuild/api/json\r\n\r\n");
   EXPECT_EQ("hoge", sut->readData());
 
   sut->closeInputter();
