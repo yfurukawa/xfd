@@ -7,15 +7,20 @@
 #ifndef JOBRESULTCHECKER_H_
 #define JOBRESULTCHECKER_H_
 
-class JobResultChecker {
- public:
-  //! Constractor
-  JobResultChecker();
-  //! Destructor
-  virtual ~JobResultChecker();
+#include <string>
 
- protected:
- private:
+class JobResultChecker {
+    protected:
+        std::string jobName_;
+    public:
+       //! Constractor
+       explicit JobResultChecker(const std::string jobName);
+       //! Destructor
+       virtual ~JobResultChecker();
+       std::string getJobName();
+    protected:
+    private:
+        JobResultChecker();
 };
 
 #endif  // JOBRESULTCHECKER_H_
