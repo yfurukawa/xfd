@@ -1,8 +1,9 @@
 CC = g++
 RM = rm -f
-INCLUDE = -I/usr/incude -I/usr/local/include -I.
-LIB_DIR = -L/usr/lib64 -L/usr/local/lib64
-LIB = -lpthread
+JSON_C_DIR = /usr/local
+INCLUDE = -I/usr/incude -I/usr/local/include -I. -I$(JSON_C_DIR)/include/json-c
+LIB_DIR = -L/usr/lib64 -L/usr/local/lib64 -L$(JSON_C_DIR)/lib
+LIB = -lpthread -ljson-c
 OPT = -O0 -g3 -Wall -Wnon-virtual-dtor -Woverloaded-virtual -fmessage-length=0 -fprofile-arcs -ftest-coverage
 TARGET = a.out
 include productionSources.mk
