@@ -70,8 +70,8 @@ bool NetworkDAO::isExsist(std::string name) {
     return false;
 }
 
-void NetworkDAO::sendRequest(const std::string& requestMesage) {
-    if(write(socket_, requestMesage.c_str(), requestMesage.size()) < 0){
+void NetworkDAO::sendRequest(const std::string& requestMessage) {
+    if(write(socket_, requestMessage.c_str(), requestMessage.size()) < 0){
         std::cerr << "write" << std::endl;
     }
 }

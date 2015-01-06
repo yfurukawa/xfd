@@ -28,7 +28,7 @@ class NetworkDAO : public IInputter {
     virtual void closeInputter();
     virtual std::string readData();
     virtual bool isExsist ( std::string name );
-    void sendRequest(const std::string& requestMesage);
+    virtual void sendRequest(const std::string& requestMessage);
 
   protected:
     void split(std::string url, char delimiter, std::string& hostName, std::string& port);

@@ -4,6 +4,10 @@
 */
 #include "./JobResultChecker.h"
 
+bool JobResultChecker::checkResult() {
+    return false;
+}
+
 JobResultChecker::JobResultChecker() : jobName_("") {
 }
 

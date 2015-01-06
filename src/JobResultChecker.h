@@ -18,6 +18,7 @@ class JobResultChecker {
        //! Destructor
        virtual ~JobResultChecker();
        std::string getJobName();
+       bool checkResult();
     protected:
     private:
         JobResultChecker();
