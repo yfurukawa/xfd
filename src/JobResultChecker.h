@@ -8,13 +8,22 @@
 #define JOBRESULTCHECKER_H_
 
 #include <string>
+#include "JsonParser.h"
+
+class NetworkDAO;
 
 class JobResultChecker {
     protected:
-        std::string jobName_;
+        const std::string jobName_;
+        NetworkDAO* networkDao_;
+        JsonParser parser;
+
+        void sendRequestMessageToJenkins();
+        bool judgeJenkinsJobResult();
+
     public:
        //! Constractor
-       explicit JobResultChecker(const std::string jobName);
+       explicit JobResultChecker(const std::string jobName, NetworkDAO* networkDao);
        //! Destructor
        virtual ~JobResultChecker();
        std::string getJobName();
