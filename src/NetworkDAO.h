@@ -21,6 +21,7 @@ class NetworkDAO : public IInputter {
   public:
     //! Constractor
     NetworkDAO();
+    NetworkDAO(std::string url);
     //! Destructor
     virtual ~NetworkDAO();
 

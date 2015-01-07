@@ -13,6 +13,10 @@
 NetworkDAO::NetworkDAO() : socket_(0) {
 }
 
+NetworkDAO::NetworkDAO(std::string url) : socket_(0) {
+    openInputter(url);
+}
+
 NetworkDAO::~NetworkDAO() {
 }
 

@@ -7,15 +7,30 @@
 #ifndef CONDUCTOR_H_
 #define CONDUCTOR_H_
 
-class Conductor {
- public:
-  //! Constractor
-  Conductor();
-  //! Destructor
-  virtual ~Conductor();
+#include <string>
+#include <vector>
+#include "Configurator.h"
 
- protected:
- private:
+class JobResultChecker;
+
+class Conductor {
+protected:
+    Configurator configurator_;
+    int checkInterval_;
+    std::string baseUrl_;
+    std::vector<std::string> jobs_;
+    std::vector<JobResultChecker*> resultChecker_;
+
+    void initializeConfiguration();
+public:
+    //! Constractor
+    Conductor();
+    //! Destructor
+    virtual ~Conductor();
+
+protected:
+
+private:
 };
 
 #endif  // CONDUCTOR_H_

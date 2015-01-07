@@ -1,6 +1,6 @@
 #include "ConductorTest.h"
 
-ConductorTest::ConductorTest() {
+ConductorTest::ConductorTest() : sut(NULL) {
 
 }
 
@@ -9,7 +9,7 @@ ConductorTest::~ConductorTest() {
 }
 
 void ConductorTest::SetUp() {
-	sut = new Conductor();
+	sut = new ConductorSpy();
 }
 
 void ConductorTest::TearDown() {

@@ -2,11 +2,11 @@
 #define CONDUCTORTEST_H_
 
 #include <gtest/gtest.h>
-#include "Conductor.h"
+#include "mocks/ConductorSpy.h"
 
 class ConductorTest : public ::testing::Test {
 protected:
-	Conductor* sut;
+	ConductorSpy* sut;
 	void SetUp();
 	void TearDown();
 
