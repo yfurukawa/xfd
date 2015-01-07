@@ -4,15 +4,15 @@
  *
  */
 
-#ifndef CONFIGURATER_H_
-#define CONFIGURATER_H_
+#ifndef CONFIGURATOR_H_
+#define CONFIGURATOR_H_
 
 #include <string>
 #include <map>
 #include <vector>
 #include "FileDAO.h"
 
-class Configurater {
+class Configurator {
   private:
     FileDAO fileDao_;
     std::string configFile_;
@@ -22,10 +22,10 @@ class Configurater {
 
   public:
     //! Constractor
-    Configurater();
-    Configurater(std::string configFile);
+    Configurator();
+    Configurator(std::string configFile);
     //! Destructor
-    virtual ~Configurater();
+    virtual ~Configurator();
     int getCheckInterval() { return checkInterval_; };
     std::string getBaseURL() { return baseUrl_; };
     int getNumberOfJobs() { return jobs_.size(); };
@@ -41,4 +41,4 @@ class Configurater {
   private:
 };
 
-#endif  // CONFIGURATER_H_
+#endif  // CONFIGURATOR_H_
