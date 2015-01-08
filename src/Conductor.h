@@ -22,11 +22,13 @@ protected:
     std::vector<JobResultChecker*> resultChecker_;
 
     void initializeConfiguration();
+    bool checkJobResult();
 public:
     //! Constractor
     Conductor();
     //! Destructor
     virtual ~Conductor();
+    void execute();
 
 protected:
 

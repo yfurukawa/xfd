@@ -16,7 +16,3 @@ void ConductorTest::TearDown() {
 	delete sut;
 }
 
-TEST_F (ConductorTest, testNameIsHere_ChangeThis) {
-/* Write a test code here. */
-
-}

@@ -12,6 +12,7 @@ JobResultChecker::JobResultChecker() : jobName_(""), networkDao_(NULL) {
 }
 
 JobResultChecker::~JobResultChecker() {
+    delete networkDao_;
 }
 
 JobResultChecker::JobResultChecker(const std::string jobName, NetworkDAO* networkDao) : jobName_(jobName), networkDao_(networkDao) {

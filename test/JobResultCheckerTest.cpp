@@ -36,7 +36,6 @@ TEST_F (JobResultCheckerTest, testSentRequest) {
     sut->checkResult();
 
     EXPECT_EQ("GET /job/testJob/lastBuild/api/json\r\n\r\n", daoMock->getRequestedMessage());
-    delete daoMock;
 }
 
 TEST_F (JobResultCheckerTest, testCheckResult_true) {
@@ -45,7 +44,6 @@ TEST_F (JobResultCheckerTest, testCheckResult_true) {
     sut = new JobResultChecker(jobName, daoMock);
 
     EXPECT_EQ(true, sut->checkResult());
-    delete daoMock;
 }
 
 TEST_F (JobResultCheckerTest, testCheckResult_false) {
@@ -55,5 +53,4 @@ TEST_F (JobResultCheckerTest, testCheckResult_false) {
     sut = new JobResultChecker(jobName, daoMock);
 
     EXPECT_EQ(false, sut->checkResult());
-    delete daoMock;
 }
