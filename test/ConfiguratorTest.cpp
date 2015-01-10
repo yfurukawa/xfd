@@ -39,7 +39,7 @@ TEST_F (ConfiguratorTest, testGetBaseURL) {
 TEST_F (ConfiguratorTest, testGetNumberOfJobs) {
     sut = new Configurator("test.conf");
     sut->readConfigurationData();
-    EXPECT_EQ(2, sut->getNumberOfJobs());
+    EXPECT_EQ(2, sut->getJobs().size());
 }
 
 TEST_F (ConfiguratorTest, testGetJobs) {
