@@ -1,15 +1,16 @@
 CC = g++
 RM = rm -f
 JSON_C_DIR = /usr/local
-INCLUDE = -I/usr/incude -I/usr/local/include -I. -I$(JSON_C_DIR)/include/json-c
+INCLUDE = -I/usr/incude -I/usr/local/include -I. -I$(JSON_C_DIR)/include
 LIB_DIR = -L/usr/lib64 -L/usr/local/lib64 -L$(JSON_C_DIR)/lib
 LIB = -lpthread -ljson-c
-OPT = -O0 -g3 -Wall -Wnon-virtual-dtor -Woverloaded-virtual -fmessage-length=0 -fprofile-arcs -ftest-coverage
+OPT = -O3 -g0 -Wall
 TARGET = a.out
 include productionSources.mk
 
 all: $(SRC:.cpp=.o) main.o
-	$(CC) $(INCLUDE) $(LIB_DIR) $(OPT) -o $(TARGET) $(SRC:.cpp=.o) main.o
+	$(CC) $(INCLUDE) $(LIB_DIR) $(LIB) $(OPT) -o $(TARGET) $(SRC:.cpp=.o) main.o
+	
 $(SRC:.cpp=.o): $(SRC)
 	$(CC) $(INCLUDE) $(LIB_DIR) $(OPT) -c $(SRC)
 
