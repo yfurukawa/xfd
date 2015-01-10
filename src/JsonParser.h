@@ -9,6 +9,7 @@
 
 #include <string>
 #include <map>
+#include <json-c/json.h>
 
 class JsonParser {
 public:

@@ -2,7 +2,7 @@
  * Copyright
  *
 */
-#include <json-c/json.h>
+
 #include "./JsonParser.h"
 
 JsonParser::JsonParser() {
