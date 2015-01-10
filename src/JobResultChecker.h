@@ -20,6 +20,7 @@ class JobResultChecker {
 
         void sendRequestMessageToJenkins();
         bool judgeJenkinsJobResult();
+        bool isJsonString(std::string readData);
 
     public:
        //! Constractor

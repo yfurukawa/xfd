@@ -32,11 +32,14 @@ std::string JobResultChecker::getJobName() {
 }
 
 bool JobResultChecker::judgeJenkinsJobResult() {
-    if( parser.parse(networkDao_->readData())["result"] == "\"SUCCESS\"") {
-        return true;
+    std::string readData = networkDao_->readData();
+    if( isJsonString(readData)) {
+        return parser.parse(readData)["result"] == "\"SUCCESS\""?true:false;
     }
-    else {
-        return false;
-    }
+    return false;
+}
+
+bool JobResultChecker::isJsonString(std::string readData) {
+    return readData[0] == '{';
 }
 
