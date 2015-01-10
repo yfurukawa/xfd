@@ -25,68 +25,82 @@ class Configurator {
 
         //! コンフィグレーションファイルから設定データを読み込む
          /*!
-          *
+          * コンフィグレーションファイルから設定データを読み込む際に
+          * 問題があれば例外をスローする。
+          * 　ファイルが見つからない　：　std::string
+          * 　ファイルが開かれていないのに読み込もうとした　：　std::string
           */
         void readConfigurationData();
-        //!
+
+        //! 監視間隔を返す
         /*!
-         * \return オブジェクトファイル名
+         * \return 監視間隔[秒]
          */
         int getCheckInterval() { return checkInterval_; };
-        //!
+
+        //! jenkinsのアドレスを返す
         /*!
-         * \return オブジェクトファイル名
+         * \return アドレス（ホスト名：ポート番号）
          */
         std::string getBaseURL() { return baseUrl_; };
-        //!
+
+        //! jenkinsのジョブリストを返す
         /*!
-         * \return オブジェクトファイル名
+         * \return ジョブリスト
          */
         std::vector<std::string> getJobs() { return jobs_; };
-        //!
+
+        //! 現在のコンフィグレーションファイルのファイル名を返す
         /*!
-         * \return オブジェクトファイル名
+         * \return コンフィグレーションファイル名
          */
         std::string getConfigFile() { return configFile_; };
 
     protected:
-        //!
+        //! 設定データのパーサーを呼び出す移譲メソッド
         /*!
-         * \param name モジュール名
+         * \param[in] datas 設定データのキーと値のペア
          */
         void parseData(std::map<std::string, std::string> datas);
-        //!
+
+        //! 設定データをキーと値のペアに分割する
         /*!
-         * \param name モジュール名
+         * \param[in] str 設定データ
+         * \param[in] delimiter 設定データ分割文字
+         * \param[out] key 設定データの種類
+         * \param[out] value 設定値
          */
         void split(const std::string &str, char delimiter, std::string& key, std::string& value);
-        //!
+
+        //! ファイルから読み込んだ行がコメント行か否かを判定する
         /*!
-         * \param name モジュール名
+         * \param dataString 読み込んだ行
          */
         /*!
-         * \return オブジェクトファイル名
+         * \return 判定結果（true：コメント行）
          */
         bool isCommentLine(std::string dataString);
-        //!
+
+        //! 設定値のペアから監視間隔を見つけ保存する
         /*!
-         * \param name モジュール名
+         * \param[in] configData 設定データのキーと値のペア
          */
         void parseIntervalTime(std::map<std::string, std::string> configData);
-        //!
+
+        //! 設定値のペアからjenkinsのアドレスを見つけ保存する
         /*!
-         * \param name モジュール名
+         * \param[in] configData 設定データのキーと値のペア
          */
         void parseUrl(std::map<std::string, std::string> configData);
 
     private:
         //!
         Configurator();
-        FileDAO fileDao_; //!<
-        std::string configFile_; //!<
-        int checkInterval_; //!<
-        std::string baseUrl_; //!<
-        std::vector<std::string> jobs_; //!<
+        FileDAO fileDao_; //!< ファイルアクセスクラス
+        std::string configFile_; //!< コンフィグレーションファイル名
+        int checkInterval_; //!< 監視間隔[秒]
+        std::string baseUrl_; //!< jenkinsのアドレス
+        std::vector<std::string> jobs_; //!< jenkinsのジョブ名のリスト
 };
 
 #endif  // CONFIGURATOR_H_
