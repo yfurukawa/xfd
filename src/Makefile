@@ -21,7 +21,7 @@ clean:
 	$(RM) *.o $(TARGET) $(TEST_TARGET) gmon.out *.gc* *.xml *.exe *.txt Fuga.cpp Hoge.cpp
 
 
-TEST_TARGET = a.outTest
+TEST_TARGET = xfdTest
 TEST_INCLUDE = -I../test -I.
 TEST_LIB = -lgtest
 TEST_OPT = -O0 -g3 -Wall -fmessage-length=0 -pg -fprofile-arcs -ftest-coverage
