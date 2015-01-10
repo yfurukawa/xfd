@@ -6,14 +6,12 @@
 #include <sstream>
 #include <iostream>
 
-Configurator::Configurator() : configFile_("/usr/local/etc/xfd.conf"),
+Configurator::Configurator() : configFile_(""),
     checkInterval_(0), baseUrl_("") {
-  readConfigurationData();
 }
 
 Configurator::Configurator(std::string configFile) : configFile_(configFile),
     checkInterval_(0), baseUrl_("") {
-  readConfigurationData();
 }
 
 Configurator::~Configurator() {
@@ -25,7 +23,17 @@ void Configurator::readConfigurationData() {
   std::string key;
   std::string value;
   std::map<std::string, std::string> configData;
-  fileDao_.openInputter(configFile_);
+  try{
+      fileDao_.openInputter(configFile_);
+  }
+  catch(const std::ios::failure& e) {
+      std::string message("File Not Found");
+      throw message;
+  }
+  catch(...) {
+      std::string message("Unknown Exception");
+      throw message;
+  }
 
   do {
     readData = fileDao_.readData();

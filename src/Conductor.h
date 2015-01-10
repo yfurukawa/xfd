@@ -9,13 +9,13 @@
 
 #include <string>
 #include <vector>
-#include "Configurator.h"
 
 class JobResultChecker;
+class Configurator;
 
 class Conductor {
 protected:
-    Configurator configurator_;
+    Configurator* configurator_;
     int checkInterval_;
     std::string baseUrl_;
     std::vector<std::string> jobs_;
