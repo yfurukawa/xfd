@@ -18,7 +18,6 @@ Configurator::Configurator(std::string configFile) : configFile_(configFile),
 Configurator::~Configurator() {
 }
 
-/////////////////////////////////////////////////////////////////////
 void Configurator::readConfigurationData() {
   std::string readData("");
   std::string key("");
@@ -64,6 +63,8 @@ void Configurator::readConfigurationData() {
 
   fileDao_.closeInputter();
 }
+
+/////////////////////////////////////////////////////////////////////
 
 void Configurator::parseData(std::map<std::string, std::string> datas) {
   parseIntervalTime(datas);

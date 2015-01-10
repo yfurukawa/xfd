@@ -13,6 +13,19 @@ Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_("") {
     initializeConfiguration();
 }
 
+void Conductor::execute() {
+    bool result(false);
+
+    result = tallyJobResult();
+    if(result) {
+        std::cout << "Success" << std::endl;
+    }
+    else {
+        std::cout << "Broken" << std::endl;
+    }
+}
+
+////////////////////////////////////////////////
 Conductor::~Conductor() {
 }
 
@@ -34,7 +47,7 @@ void Conductor::initializeConfiguration() {
     }
 }
 
-bool Conductor::checkJobResult() {
+bool Conductor::tallyJobResult() {
     bool result(true);
     for(std::vector<JobResultChecker*>::iterator iter = resultChecker_.begin(); iter < resultChecker_.end(); ++iter) {
         try {
@@ -46,16 +59,4 @@ bool Conductor::checkJobResult() {
         }
     }
     return result;
-}
-
-void Conductor::execute() {
-    bool result(false);
-
-    result = checkJobResult();
-    if(result) {
-        std::cout << "Success" << std::endl;
-    }
-    else {
-        std::cout << "Broken" << std::endl;
-    }
 }
