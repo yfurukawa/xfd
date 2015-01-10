@@ -62,8 +62,9 @@ std::string NetworkDAO::readData() {
     memset(readBuffer, 0, sizeof(readBuffer));
 
     if(read(socket_, readBuffer, sizeof(readBuffer)) < 0) {
-        std::cerr << "read" << std::endl;
-        readString = "No Data";
+        throw NetworkException("Data reciving error");
+//        std::cerr << "read" << std::endl;
+//        readString = "No Data";
     }
     else {
         readString = readBuffer;

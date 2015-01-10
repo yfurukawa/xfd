@@ -51,10 +51,10 @@ bool FileDAO::isExsist( std::string name ){
 
 std::string FileDAO::readData(){
 	if(inputStream_.is_open()) {
-		std::string readData;
+		std::string readData("");
 		if(!inputStream_.eof()){
-		  getline(inputStream_, readData);
-		  return readData;
+		    getline(inputStream_, readData);
+		    return readData;
 		}
 		else {
 		  return "EOF";

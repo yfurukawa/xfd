@@ -5,6 +5,7 @@
 #include "./Configurator.h"
 #include <sstream>
 #include <iostream>
+#include <stdexcept>
 
 Configurator::Configurator() : configFile_(""),
     checkInterval_(0), baseUrl_("") {
@@ -19,9 +20,9 @@ Configurator::~Configurator() {
 
 /////////////////////////////////////////////////////////////////////
 void Configurator::readConfigurationData() {
-  std::string readData;
-  std::string key;
-  std::string value;
+  std::string readData("");
+  std::string key("");
+  std::string value("");
   std::map<std::string, std::string> configData;
   try{
       fileDao_.openInputter(configFile_);
@@ -36,7 +37,15 @@ void Configurator::readConfigurationData() {
   }
 
   do {
-    readData = fileDao_.readData();
+      try {
+          readData = fileDao_.readData();
+      }
+      catch(const std::string& e) {
+          throw;
+      }
+      catch(const std::ios::failure& e){
+          break;
+      }
     if(readData == "EOF") {
       break;
     }

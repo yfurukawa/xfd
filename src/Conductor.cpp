@@ -1,12 +1,13 @@
 /*
  * Copyright
  *
-*/
+ */
 #include <iostream>
 #include "Conductor.h"
 #include "Configurator.h"
 #include "JobResultChecker.h"
 #include "NetworkDAO.h"
+#include "NetworkException.h"
 
 Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_("") {
     initializeConfiguration();
@@ -18,6 +19,7 @@ Conductor::~Conductor() {
 void Conductor::initializeConfiguration() {
     try {
         configurator_ = new Configurator("/usr/local/etc/xfd.conf");
+        configurator_->readConfigurationData();
     }
     catch(std::string& e){
         std::cerr << e << std::endl;
@@ -35,7 +37,13 @@ void Conductor::initializeConfiguration() {
 bool Conductor::checkJobResult() {
     bool result(true);
     for(std::vector<JobResultChecker*>::iterator iter = resultChecker_.begin(); iter < resultChecker_.end(); ++iter) {
-        result &= (*iter)->checkResult();
+        try {
+            result = result && (*iter)->checkResult();
+        }
+        catch(NetworkException& e) {
+            std::cout << e.what() << std::endl;
+            exit(1);
+        }
     }
     return result;
 }

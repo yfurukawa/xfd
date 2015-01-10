@@ -106,6 +106,7 @@ TEST_F(FileDAOTest, readData_MultiLines) {
 	try {
 		EXPECT_EQ(testString1stLine, sut->readData());
 		EXPECT_EQ(testString2ndLine, sut->readData());
+		EXPECT_THROW(sut->readData(), std::ios::failure);
 	}
 	catch(const std::ios::failure& e) {
 		std::cout << e.what() << std::endl;
