@@ -10,6 +10,8 @@
 
 #include "NetworkDAO.h"
 
+enum resultMode{success, fail, unknown};
+
 class NetworkDAOMock : public NetworkDAO {
     private:
         std::string message_;
@@ -23,7 +25,7 @@ class NetworkDAOMock : public NetworkDAO {
         virtual bool isExsist ( std::string name ){ return true; };
         void sendRequest(const std::string& requestMessage) { message_ = requestMessage; };
         std::string getRequestedMessage() { return message_; };
-        void setResult(bool result);
+        void setResult(enum resultMode setMode);
 };
 
 #endif /* NETWORKDAOMOCK_H_ */

@@ -8,7 +8,9 @@
 #include <string.h>
 #include <sstream>
 #include <iostream>
-#include "./NetworkDAO.h"
+#include <exception>
+#include "NetworkDAO.h"
+#include "NetworkException.h"
 
 NetworkDAO::NetworkDAO() : socket_(0) {
 }
@@ -39,12 +41,12 @@ void NetworkDAO::openInputter(std::string url) {
         }
 
         if(*addrptr == NULL) {
-            std::cerr <<"connect" << std::endl;
+            throw NetworkException("Server Connection Error with host name");
         }
     }
     else {
         if(connect(socket_, (struct sockaddr*)&server_, sizeof(server_)) != 0) {
-            std::cerr << "connect" << std::endl;
+            throw NetworkException("Server Connection Error with IP Address");;
         }
     }
 
@@ -76,7 +78,7 @@ bool NetworkDAO::isExsist(std::string name) {
 
 void NetworkDAO::sendRequest(const std::string& requestMessage) {
     if(write(socket_, requestMessage.c_str(), requestMessage.size()) < 0){
-        std::cerr << "write" << std::endl;
+        throw NetworkException("Request message send error");
     }
 }
 
@@ -84,7 +86,7 @@ void NetworkDAO::sendRequest(const std::string& requestMessage) {
 void NetworkDAO::prepareSocket() {
     socket_ = socket(AF_INET, SOCK_STREAM, 0);
     if (socket_ < 0) {
-        std::cerr << "socket" << std::endl;
+        throw NetworkException("Socket initialization error");
     }
 }
 
@@ -130,10 +132,10 @@ struct hostent* NetworkDAO::resolveIPAddressWithHostName(const std::string& url)
     struct hostent* host = gethostbyname(substringHostNameFromconfiguredURL(url).c_str());
     if (!isSuccessGethostbyname(host)) {
         if (h_errno == HOST_NOT_FOUND) {
-            std::cerr << "host not found : " << substringHostNameFromconfiguredURL(url) << std::endl;
+            throw NetworkException("host not found : " + substringHostNameFromconfiguredURL(url));
         }
         else {
-            std::cerr << hstrerror(h_errno) << std::endl;
+            throw NetworkException(hstrerror(h_errno));
         }
     }
     return host;

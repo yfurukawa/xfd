@@ -40,6 +40,7 @@ TEST_F (JobResultCheckerTest, testSentRequest) {
 
 TEST_F (JobResultCheckerTest, testCheckResult_true) {
     NetworkDAOMock* daoMock(new NetworkDAOMock());
+    daoMock->setResult(success);
     std::string jobName("testJob");
     sut = new JobResultChecker(jobName, daoMock);
 
@@ -48,7 +49,16 @@ TEST_F (JobResultCheckerTest, testCheckResult_true) {
 
 TEST_F (JobResultCheckerTest, testCheckResult_false) {
     NetworkDAOMock* daoMock(new NetworkDAOMock());
-    daoMock->setResult(false);
+    daoMock->setResult(fail);
+    std::string jobName("testJob");
+    sut = new JobResultChecker(jobName, daoMock);
+
+    EXPECT_EQ(false, sut->checkResult());
+}
+
+TEST_F (JobResultCheckerTest, testCheckResult_serverAccessFail) {
+    NetworkDAOMock* daoMock(new NetworkDAOMock());
+    daoMock->setResult(unknown);
     std::string jobName("testJob");
     sut = new JobResultChecker(jobName, daoMock);
 
