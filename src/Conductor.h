@@ -23,6 +23,7 @@ class Conductor {
 public:
     //! コンストラクタ
     Conductor();
+    Conductor(const std::string& configFile);
     //! デストラクタ
     virtual ~Conductor();
     //! 監視を実行する
@@ -40,6 +41,7 @@ protected:
     std::vector<std::string> jobs_; //!< ジョブ名のリスト
     std::vector<JobResultChecker*> resultChecker_; //!< 各ジョブの実行結果監視クラスのリスト
     int bufferLength_byte_; //!< ネットワークの受信バッファのサイズ
+    std::string configFile_; //!< コンフィグレーションファイル名
 };
 
 #endif  // CONDUCTOR_H_

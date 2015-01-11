@@ -11,7 +11,12 @@
 #include "NetworkDAO.h"
 #include "NetworkException.h"
 
-Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_(""), bufferLength_byte_(1024) {
+Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_(""), bufferLength_byte_(1024),
+    configFile_("/usr/local/etc/xfd.conf") {
+}
+
+Conductor::Conductor(const std::string& configFile) : configurator_(NULL), checkInterval_(0), baseUrl_(""), bufferLength_byte_(1024),
+    configFile_(configFile) {
 }
 
 void Conductor::execute() {
@@ -25,7 +30,7 @@ void Conductor::execute() {
 
     bool result(false);
 
-    while(1) {
+    do {
         try{
             result = tallyJobResult();
             if(result) {
@@ -45,7 +50,7 @@ void Conductor::execute() {
         catch(...) {
             std::cerr << "Caught Unknown Exception" << std::endl;
          }
-    }
+    } while(checkInterval_ != 0);
 }
 
 ////////////////////////////////////////////////
@@ -54,7 +59,7 @@ Conductor::~Conductor() {
 
 void Conductor::initializeConfiguration() {
     try {
-        configurator_ = new Configurator("/usr/local/etc/xfd.conf");
+        configurator_ = new Configurator(configFile_);
         configurator_->readConfigurationData();
     }
     catch(std::string& e){

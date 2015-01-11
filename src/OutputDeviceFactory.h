@@ -20,7 +20,7 @@ class OutputDeviceFactory {
         //! コンストラクタ
         OutputDeviceFactory() {}
         OutputDeviceFactory(const OutputDeviceFactory& own) {}
-        OutputDeviceFactory& operator=(const OutputDeviceFactory& own){}
+
 };
 
 #endif  // OUTPUTDEVICEFACTORY_H_
