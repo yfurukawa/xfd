@@ -26,10 +26,9 @@ class NetworkDAO : public IInputter {
 
     //! コンストラクタ
     /**
-    * \param[in] url 接続先サーバのホスト名とポート番号　形式　ホスト名:ポート番号
      * \param[in] size 読み込みバッファサイズ
      */
-    NetworkDAO(std::string url, int size);
+    NetworkDAO(int size);
 
     //! デストラクタ
     virtual ~NetworkDAO();

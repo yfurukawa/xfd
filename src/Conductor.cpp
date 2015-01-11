@@ -65,7 +65,7 @@ void Conductor::initializeConfiguration() {
     jobs_ = configurator_->getJobs();
 
     for(std::vector<std::string>::iterator iter = jobs_.begin(); iter < jobs_.end(); ++iter) {
-        resultChecker_.push_back(new JobResultChecker(*iter, baseUrl_, new NetworkDAO(baseUrl_, bufferLength_byte_)));
+        resultChecker_.push_back(new JobResultChecker(*iter, baseUrl_, new NetworkDAO(bufferLength_byte_)));
     }
 }
 
