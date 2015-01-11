@@ -39,7 +39,7 @@ class Configurator {
         /*!
          * \return 監視間隔[秒]
          */
-        int getCheckInterval() { return checkInterval_; };
+        int getCheckInterval() { return checkInterval_sec_; };
 
         //! jenkinsのアドレスを返す
         /*!
@@ -99,7 +99,7 @@ class Configurator {
         Configurator();
         FileDAO fileDao_; //!< ファイルアクセスクラス
         std::string configFile_; //!< コンフィグレーションファイル名
-        int checkInterval_; //!< 監視間隔[秒]
+        int checkInterval_sec_; //!< 監視間隔[秒]
         std::string baseUrl_; //!< jenkinsのアドレス
         std::vector<std::string> jobs_; //!< jenkinsのジョブ名のリスト
 };

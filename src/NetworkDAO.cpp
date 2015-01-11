@@ -12,10 +12,10 @@
 #include "NetworkDAO.h"
 #include "NetworkException.h"
 
-NetworkDAO::NetworkDAO() : socket_(0) {
+NetworkDAO::NetworkDAO() : socket_(0), readBufferLength_byte_(100) {
 }
 
-NetworkDAO::NetworkDAO(std::string url) : socket_(0) {
+NetworkDAO::NetworkDAO(std::string url, int size) : socket_(0), readBufferLength_byte_(size) {
     // TODO 引数でリードバッファのサイズを貰うように修正する
     openInputter(url);
 }

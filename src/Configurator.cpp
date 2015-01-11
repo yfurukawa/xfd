@@ -8,11 +8,11 @@
 #include <stdexcept>
 
 Configurator::Configurator() : configFile_(""),
-    checkInterval_(0), baseUrl_("") {
+    checkInterval_sec_(0), baseUrl_("") {
 }
 
 Configurator::Configurator(std::string configFile) : configFile_(configFile),
-    checkInterval_(0), baseUrl_("") {
+    checkInterval_sec_(0), baseUrl_("") {
 }
 
 Configurator::~Configurator() {
@@ -78,7 +78,7 @@ bool Configurator::isCommentLine(std::string dataString) {
 void Configurator::parseIntervalTime(
     std::map<std::string, std::string> configData) {
   std::istringstream iss(configData["interval"]);
-  iss >> checkInterval_;
+  iss >> checkInterval_sec_;
 }
 
 void Configurator::split(const std::string& str, char delimiter,

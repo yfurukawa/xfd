@@ -26,9 +26,10 @@ class NetworkDAO : public IInputter {
 
     //! コンストラクタ
     /**
-     * \param[in] url 接続先サーバのホスト名とポート番号　形式　ホスト名:ポート番号
+    * \param[in] url 接続先サーバのホスト名とポート番号　形式　ホスト名:ポート番号
+     * \param[in] size 読み込みバッファサイズ
      */
-    NetworkDAO(std::string url);
+    NetworkDAO(std::string url, int size);
 
     //! デストラクタ
     virtual ~NetworkDAO();
@@ -117,6 +118,7 @@ class NetworkDAO : public IInputter {
 
     int socket_; //!< ソケット番号
     struct sockaddr_in server_; //!< サーバ情報
+    int readBufferLength_byte_; //!< サーバからデータを読み込む際のバッファサイズ
 };
 
 #endif  // NETWORKDAO_H_

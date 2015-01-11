@@ -9,7 +9,7 @@
 #include "NetworkDAO.h"
 #include "NetworkException.h"
 
-Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_("") {
+Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_(""), bufferLength_byte_(1024) {
     initializeConfiguration();
 }
 
@@ -43,7 +43,7 @@ void Conductor::initializeConfiguration() {
     jobs_ = configurator_->getJobs();
 
     for(std::vector<std::string>::iterator iter = jobs_.begin(); iter < jobs_.end(); ++iter) {
-        resultChecker_.push_back(new JobResultChecker(*iter, new NetworkDAO(baseUrl_)));
+        resultChecker_.push_back(new JobResultChecker(*iter, new NetworkDAO(baseUrl_, bufferLength_byte_)));
     }
 }
 
