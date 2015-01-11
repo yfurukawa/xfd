@@ -12,11 +12,10 @@
 #include "NetworkDAO.h"
 #include "NetworkException.h"
 
-NetworkDAO::NetworkDAO() : socket_(0), readBufferLength_byte_(100) {
+NetworkDAO::NetworkDAO() : socket_(0), readBufferLength_byte_(1024) {
 }
 
 NetworkDAO::NetworkDAO(std::string url, int size) : socket_(0), readBufferLength_byte_(size) {
-    // TODO 引数でリードバッファのサイズを貰うように修正する
     openInputter(url);
 }
 
@@ -58,13 +57,18 @@ void NetworkDAO::closeInputter() {
 }
 
 std::string NetworkDAO::readData() {
-    char readBuffer[1024];
+    char readBuffer[readBufferLength_byte_];
     std::string readString;
     memset(readBuffer, 0, sizeof(readBuffer));
 
-    if(read(socket_, readBuffer, sizeof(readBuffer)) < 0) {
-        throw NetworkException("Data reciving error");
-    } // TODO バッファオーバーフローした時に例外をスローするように処理を追加する
+    int readSize(read(socket_, readBuffer, sizeof(readBuffer)));
+
+    if( readSize < 0 ) {
+        throw NetworkException("Data receiving error");
+    }
+    else if( readSize > readBufferLength_byte_ ) {
+        throw NetworkException("Buffer Over Flow");
+    }
     else {
         readString = readBuffer;
     }
@@ -99,11 +103,8 @@ void NetworkDAO::initializeServerInformation(const std::string& url) {
 std::string NetworkDAO::substringHostNameFromconfiguredURL(const std::string& url) {
     std::string hostName;
     std::string portNumber;
-//    int port;
 
     split(url, ':', hostName, portNumber);
-//    std::istringstream iss(portNumber);
-//    iss >> port;
 
     return hostName;
 }
