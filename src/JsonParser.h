@@ -1,6 +1,12 @@
 /**
  * jsonParser.h<br>
- * Copyright
+ * JSON文字列をパースする
+ *
+ * Jenkinsから取得したJSON文字列をパースする。<br>
+ * 実際にパースするのは、json-cライブラリ。<br>
+ * https://github.com/json-c/json-c
+ *
+ * Copyright Yoshihiro Furukawa
  *
  */
 
@@ -13,14 +19,18 @@
 
 class JsonParser {
 public:
-    //! Constractor
+    //! コンストラクタ
     JsonParser();
-    //! Destructor
-    virtual ~JsonParser();
-    std::map<std::string, std::string> parse(const std::string jsonString);
 
-protected:
-private:
+    //! デストラクタ
+    virtual ~JsonParser();
+
+    //! JSON文字列をパースする
+    /**
+     * \param[in] jsonString パースしたいJSON文字列
+     * \return パースしたキーと値のペア
+     */
+    std::map<std::string, std::string> parse(const std::string jsonString);
 };
 
 #endif  // JSONPARSER_H_

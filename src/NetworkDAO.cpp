@@ -16,6 +16,7 @@ NetworkDAO::NetworkDAO() : socket_(0) {
 }
 
 NetworkDAO::NetworkDAO(std::string url) : socket_(0) {
+    // TODO 引数でリードバッファのサイズを貰うように修正する
     openInputter(url);
 }
 
@@ -63,9 +64,7 @@ std::string NetworkDAO::readData() {
 
     if(read(socket_, readBuffer, sizeof(readBuffer)) < 0) {
         throw NetworkException("Data reciving error");
-//        std::cerr << "read" << std::endl;
-//        readString = "No Data";
-    }
+    } // TODO バッファオーバーフローした時に例外をスローするように処理を追加する
     else {
         readString = readBuffer;
     }
@@ -91,14 +90,20 @@ void NetworkDAO::prepareSocket() {
     }
 }
 
+void NetworkDAO::initializeServerInformation(const std::string& url) {
+    server_.sin_family = AF_INET;
+    server_.sin_port = htons(substringPortNumberFromConfiguredURL(url));
+    server_.sin_addr.s_addr = inet_addr(substringHostNameFromconfiguredURL(url).c_str());
+}
+
 std::string NetworkDAO::substringHostNameFromconfiguredURL(const std::string& url) {
     std::string hostName;
     std::string portNumber;
-    int port;
+//    int port;
 
     split(url, ':', hostName, portNumber);
-    std::istringstream iss(portNumber);
-    iss >> port;
+//    std::istringstream iss(portNumber);
+//    iss >> port;
 
     return hostName;
 }
@@ -113,12 +118,6 @@ int NetworkDAO::substringPortNumberFromConfiguredURL(const std::string& url) {
     iss >> port;
 
     return port;
-}
-
-void NetworkDAO::initializeServerInformation(const std::string& url) {
-    server_.sin_family = AF_INET;
-    server_.sin_port = htons(substringPortNumberFromConfiguredURL(url));
-    server_.sin_addr.s_addr = inet_addr(substringHostNameFromconfiguredURL(url).c_str());
 }
 
 bool NetworkDAO::isSuccessGethostbyname(struct hostent* host) {

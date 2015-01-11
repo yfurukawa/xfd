@@ -1,6 +1,9 @@
 /**
  * Configurater.h<br>
- * Copyright
+ * コンフィグレーションファイルから設定値を読み込む
+ *
+ * コンフィグレーションファイルから設定を読み込み、設定キーと値にパースする
+ * Copyright Yoshihiro Furukawa
  *
  */
 
@@ -16,7 +19,7 @@ class Configurator {
     public:
         //! コンストラクタ
         /*!
-        * \param configFile コンフィグレーションファイル名（/path/to/file）
+        * \param[in] configFile コンフィグレーションファイル名（/path/to/file）
          */
         Configurator(std::string configFile);
 
@@ -27,8 +30,8 @@ class Configurator {
          /*!
           * コンフィグレーションファイルから設定データを読み込む際に
           * 問題があれば例外をスローする。<br>
-          * 　ファイルが見つからない　：　std::string<br>
-          * 　ファイルが開かれていないのに読み込もうとした　：　std::string
+          * \exception std::string File Not Foundメッセージ
+          * \exception std::string File is not openedメッセージ
           */
         void readConfigurationData();
 
@@ -74,9 +77,7 @@ class Configurator {
 
         //! ファイルから読み込んだ行がコメント行か否かを判定する
         /*!
-         * \param dataString 読み込んだ行
-         */
-        /*!
+         * \param[in] dataString 読み込んだ行
          * \return 判定結果（true：コメント行）
          */
         bool isCommentLine(std::string dataString);
@@ -94,7 +95,7 @@ class Configurator {
         void parseUrl(std::map<std::string, std::string> configData);
 
     private:
-        //!
+        //! コンストラクタ
         Configurator();
         FileDAO fileDao_; //!< ファイルアクセスクラス
         std::string configFile_; //!< コンフィグレーションファイル名
