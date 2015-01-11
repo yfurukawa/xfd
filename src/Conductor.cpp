@@ -3,6 +3,8 @@
  *
  */
 #include <iostream>
+#include <string>
+#include <unistd.h>
 #include "Conductor.h"
 #include "Configurator.h"
 #include "JobResultChecker.h"
@@ -10,18 +12,39 @@
 #include "NetworkException.h"
 
 Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_(""), bufferLength_byte_(1024) {
-    initializeConfiguration();
 }
 
 void Conductor::execute() {
+
+    try {
+        initializeConfiguration();
+    }
+    catch(const std::string& message) {
+        std::cerr << message << std::endl;
+    }
+
     bool result(false);
 
-    result = tallyJobResult();
-    if(result) {
-        std::cout << "Success" << std::endl;
-    }
-    else {
-        std::cout << "Broken" << std::endl;
+    while(1) {
+        try{
+            result = tallyJobResult();
+            if(result) {
+                std::cout << "Success" << std::endl;
+              }
+            else {
+                std::cout << "Broken" << std::endl;
+              }
+            sleep(checkInterval_);
+         }
+        catch(const NetworkException& e) {
+            std::cerr << e.what() << std::endl;
+         }
+        catch(const std::string& message) {
+            std::cerr << message << std::endl;
+         }
+        catch(...) {
+            std::cerr << "Caught Unknown Exception" << std::endl;
+         }
     }
 }
 
@@ -35,15 +58,14 @@ void Conductor::initializeConfiguration() {
         configurator_->readConfigurationData();
     }
     catch(std::string& e){
-        std::cerr << e << std::endl;
-        exit(1);
+        throw;
     }
     checkInterval_ = configurator_->getCheckInterval();
     baseUrl_ = configurator_->getBaseURL();
     jobs_ = configurator_->getJobs();
 
     for(std::vector<std::string>::iterator iter = jobs_.begin(); iter < jobs_.end(); ++iter) {
-        resultChecker_.push_back(new JobResultChecker(*iter, new NetworkDAO(baseUrl_, bufferLength_byte_)));
+        resultChecker_.push_back(new JobResultChecker(*iter, baseUrl_, new NetworkDAO(baseUrl_, bufferLength_byte_)));
     }
 }
 
@@ -54,8 +76,7 @@ bool Conductor::tallyJobResult() {
             result = result && (*iter)->checkResult();
         }
         catch(NetworkException& e) {
-            std::cout << e.what() << std::endl;
-            exit(1);
+            throw;
         }
     }
     return result;

@@ -39,7 +39,7 @@ protected:
     std::string baseUrl_; //!< jenkinsのurl
     std::vector<std::string> jobs_; //!< ジョブ名のリスト
     std::vector<JobResultChecker*> resultChecker_; //!< 各ジョブの実行結果監視クラスのリスト
-    int bufferLength_byte_;
+    int bufferLength_byte_; //!< ネットワークの受信バッファのサイズ
 };
 
 #endif  // CONDUCTOR_H_

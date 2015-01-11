@@ -16,7 +16,7 @@ NetworkDAO::NetworkDAO() : socket_(0), readBufferLength_byte_(1024) {
 }
 
 NetworkDAO::NetworkDAO(std::string url, int size) : socket_(0), readBufferLength_byte_(size) {
-    openInputter(url);
+//    openInputter(url);
 }
 
 NetworkDAO::~NetworkDAO() {

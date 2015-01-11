@@ -9,7 +9,7 @@
 #include "NetworkDAO.h"
 #include "NetworkException.h"
 
-JobResultChecker::JobResultChecker(const std::string jobName, NetworkDAO* networkDao) : jobName_(jobName), networkDao_(networkDao) {
+JobResultChecker::JobResultChecker(const std::string jobName, const std::string& url, NetworkDAO* networkDao) : jobName_(jobName), networkDao_(networkDao), url_(url) {
 }
 
 JobResultChecker::~JobResultChecker() {
@@ -24,8 +24,10 @@ bool JobResultChecker::checkResult() {
     bool result(false);
 
     try {
+        networkDao_->openInputter(url_);
         sendRequestMessageToJenkins();
         result = judgeJenkinsJobResult();
+        networkDao_->closeInputter();
     }
     catch(NetworkException& e) {
         throw;

@@ -20,9 +20,10 @@ public:
     //! コンストラクタ
     /**
      * \param[in] jobName Jenkinsに登録されてい監視対象にするジョブ名
+     * \param[in] url 接続先サーバのホスト名とポート番号　形式　ホスト名:ポート番号
      * \param[in] networkDao ネットワークにアクセスするためのデータアクセスオブジェクト
      */
-    explicit JobResultChecker(const std::string jobName, NetworkDAO* networkDao);
+    explicit JobResultChecker(const std::string jobName, const std::string& url, NetworkDAO* networkDao);
 
     //! デストラクタ
     virtual ~JobResultChecker();
@@ -66,6 +67,7 @@ protected:
     const std::string jobName_; //!< 監視対象ジョブ名
     NetworkDAO* networkDao_; //!< ネットワークアクセスオブジェクト
     JsonParser parser; //!< JSON文字列のパーサオブジェクト
+    std::string url_;  //!< 接続先サーバのホスト名とポート番号　形式　ホスト名:ポート番号
 
 private:
     //! コンストラクタ
