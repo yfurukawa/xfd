@@ -14,6 +14,7 @@
 
 #include <string>
 #include <vector>
+#include "IOutputter.h"
 
 class JobResultChecker;
 class Configurator;
@@ -35,6 +36,8 @@ protected:
     void initializeConfiguration();
     //! 各ジョブの実行結果を集計する
     bool tallyJobResult();
+    //! 出力デバイスを初期化する
+    void initializeOutputDevice();
 
     Configurator* configurator_; //!< Configuratorクラス
     int checkInterval_; //!< 監視周期[秒]
@@ -43,6 +46,8 @@ protected:
     std::vector<JobResultChecker*> resultChecker_; //!< 各ジョブの実行結果監視クラスのリスト
     int bufferLength_byte_; //!< ネットワークの受信バッファのサイズ
     std::string configFile_; //!< コンフィグレーションファイル名
+    std::vector<std::string> outputDeviceList_; //!< 出力デバイスのリスト
+    std::vector<IOutputter*> outputter_;  //!< 出力デバイス
 };
 
 #endif  // CONDUCTOR_H_

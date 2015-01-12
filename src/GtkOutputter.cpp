@@ -8,7 +8,6 @@
 int GtkOutputter::width_(320);
 int GtkOutputter::hight_(200);
 GtkOutputter::GtkOutputter(int* argc, char*** argv) : window_(NULL), canvas_(NULL), argc_(argc), argv_(argv) {
-//    initializeDevice(argc, argv);
 }
 
 GtkOutputter::~GtkOutputter() {

@@ -11,7 +11,6 @@
 #define OFF 0
 
 GpioOutputter::GpioOutputter(std::string name) : portNumber_(5), deviceName_(name) {
-//    initializeDevice(name);
 }
 
 GpioOutputter::~GpioOutputter() {
