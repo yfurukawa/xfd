@@ -2,7 +2,7 @@
  * Copyright
  *
  */
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
 #include <pthread.h>
 #include "./GtkOutputter.h"
 
@@ -20,16 +20,14 @@ GtkOutputter::~GtkOutputter() {
 
 void GtkOutputter::outputContents(std::string outputName,
         std::string contents) {
-    pthread_t threadId(0);
 
-    if(threadId ==0) {
-        pthread_create(&threadId, NULL, &GtkOutputter::run, NULL);
-    }
     if(contents == "success") {
         currentColor_ = colorSuccess_;
+        gtk_widget_queue_draw(window_);
     }
     else {
         currentColor_ = colorFail_;
+        gtk_widget_queue_draw(window_);
     }
 
 }
@@ -40,6 +38,12 @@ void GtkOutputter::initializeDevice() {
     createWindow();
     createCanvas();
     gtk_widget_show_all(window_);
+
+    pthread_t threadId(0);
+
+    if(threadId == 0) {
+        pthread_create(&threadId, NULL, &GtkOutputter::run, NULL);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,8 +62,6 @@ void GtkOutputter::createCanvas() {
 
 gboolean GtkOutputter::draw_canvas(GtkWidget* widget, cairo_t* cr,
         gpointer data) {
-//        GdkRGBA colorSuccess = {0.0, 1.0, 0.0, 1.0};
-//        GdkRGBA colorFail = {1.0, 0.0, 0.0, 1.0};
     gdk_cairo_set_source_rgba(cr, &GtkOutputter::currentColor_);
     cairo_rectangle(cr, 0.0, 0.0, width_, hight_);
     cairo_fill(cr);

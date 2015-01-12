@@ -14,6 +14,7 @@
 
 #include <string>
 #include <vector>
+#include <pthread.h>
 #include "IOutputter.h"
 
 class JobResultChecker;
@@ -48,6 +49,7 @@ protected:
     std::string configFile_; //!< コンフィグレーションファイル名
     std::vector<std::string> outputDeviceList_; //!< 出力デバイスのリスト
     std::vector<IOutputter*> outputter_;  //!< 出力デバイス
+
 };
 
 #endif  // CONDUCTOR_H_

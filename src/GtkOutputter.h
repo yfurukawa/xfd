@@ -62,7 +62,7 @@ class GtkOutputter : public IOutputter{
         /**
          * jenkinsジョブの結果に対応した表示画面を描画する
          */
-        static gboolean draw_canvas(GtkWidget* widget, cairo_t* cr, gpointer data);
+         static gboolean draw_canvas(GtkWidget* widget, cairo_t* cr, gpointer data);
 
         //! マルチスレッド用呼出メソッド
         static void* run(void* pParameter);
@@ -72,8 +72,8 @@ class GtkOutputter : public IOutputter{
 
         GtkWidget* window_; //!< gtkのウィンドウ
         GtkWidget* canvas_; //!< 表示キャンバス
-        static int width_; //!< キャンバスの横幅[pixcel]
-        static int hight_; //!< キャンバスの縦幅[pixcel]
+        static int width_; //!< キャンバスの横幅[pixel]
+        static int hight_; //!< キャンバスの縦幅[pixel]
         static GdkRGBA colorSuccess_; //!< ジョブ成功時の表示色（緑）
         static GdkRGBA colorFail_; //!< ジョブ失敗時の表示色（赤）
         static GdkRGBA currentColor_; //!< 現在の表示色

@@ -39,7 +39,6 @@ void Conductor::execute(int* argc, char*** argv) {
 
     bool result(false);
 
-
     do {
         try{
             result = tallyJobResult();
