@@ -59,6 +59,11 @@ class Configurator {
          */
         std::string getConfigFile() { return configFile_; };
 
+        //! 出力用デバイスのリストを返す
+        /*!
+         * \return 出力用デバイスのリスト
+         */
+        std::vector<std::string> getDeviceList() { return outputter_; };
     protected:
         //! 設定データのパーサーを呼び出す移譲メソッド
         /*!
@@ -102,6 +107,8 @@ class Configurator {
         int checkInterval_sec_; //!< 監視間隔[秒]
         std::string baseUrl_; //!< jenkinsのアドレス
         std::vector<std::string> jobs_; //!< jenkinsのジョブ名のリスト
+        std::vector<std::string> outputter_; //!< 出力デバイスのリスト
+
 };
 
 #endif  // CONFIGURATOR_H_

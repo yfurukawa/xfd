@@ -36,6 +36,27 @@ TEST_F (ConfiguratorTest, testGetBaseURL) {
     EXPECT_EQ("localhost:8080", sut->getBaseURL());
 }
 
+TEST_F (ConfiguratorTest, getDeviceList_one_device) {
+    std::string file("test2.conf");
+    sut = new Configurator(file);
+    sut->readConfigurationData();
+    std::vector<std::string> list;
+    list = sut->getDeviceList();
+    EXPECT_EQ(1, list.size());
+    EXPECT_EQ("gtk", list[0]);
+}
+
+TEST_F (ConfiguratorTest, getDeviceList_two_devices) {
+    std::string file("test.conf");
+    sut = new Configurator(file);
+    sut->readConfigurationData();
+    std::vector<std::string> list;
+    list = sut->getDeviceList();
+    EXPECT_EQ(2, list.size());
+    EXPECT_EQ("gtk", list[0]);
+    EXPECT_EQ("GPIO:21", list[1]);
+}
+
 TEST_F (ConfiguratorTest, testGetNumberOfJobs) {
     sut = new Configurator("test.conf");
     sut->readConfigurationData();
