@@ -27,18 +27,25 @@ class GpioOutputter : public IOutputter {
          * \param contents ジョブの結果（successまたはfail）
          */
         virtual void outputContents( std::string outputName, std::string contents );
-    protected:
+
+        //! 出力デバイス名を返す
+        /*!
+         * \return 出力デバイス名
+         */
+        virtual std::string getDeviceName() { return deviceName_; };
 
         //! GPIOを初期化する
         /**
          * GPIOを初期化する。デバイスの初期化に失敗した場合は例外をスローする。
          * \exception 初期化に失敗したデバイス
          */
-        void initializeDevice(const std::string& name);
+    virtual void initializeDevice();
+
     private:
         //! コンストラクタ
-        GpioOutputter() : portNumber_(5) {};
+        GpioOutputter() : portNumber_(5), deviceName_("GPIO") {};
         int portNumber_;
+        std::string deviceName_;
 };
 
 #endif  // GPIOOUTPUTTER_H_

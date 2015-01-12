@@ -54,6 +54,14 @@ public:
 	 * \param[in] name 有無を確認するファイル名
 	 */
 	virtual bool isExsist( std::string name );
+
+    //! 出力デバイス名を返す
+    /*!
+     * \return 出力デバイス名
+     */
+    virtual std::string getDeviceName() { return "file"; };
+
+    virtual void initializeDevice() {};
 protected:
 	std::ifstream inputStream_; //!< 入力ファイルストリーム
 };

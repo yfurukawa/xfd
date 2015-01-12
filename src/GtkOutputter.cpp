@@ -7,8 +7,8 @@
 
 int GtkOutputter::width_(320);
 int GtkOutputter::hight_(200);
-GtkOutputter::GtkOutputter(int* argc, char*** argv) : window_(NULL), canvas_(NULL) {
-    initializeDevice(argc, argv);
+GtkOutputter::GtkOutputter(int* argc, char*** argv) : window_(NULL), canvas_(NULL), argc_(argc), argv_(argv) {
+//    initializeDevice(argc, argv);
 }
 
 GtkOutputter::~GtkOutputter() {
@@ -18,9 +18,8 @@ void GtkOutputter::outputContents(std::string outputName,
         std::string contents) {
 }
 
-////////////////////////////////////////////////////////////////////////////////
-void GtkOutputter::initializeDevice(int* argc, char*** argv) {
-    gtk_init(argc, argv);
+void GtkOutputter::initializeDevice() {
+    gtk_init(argc_, argv_);
 
     createWindow();
     createCanvas();
@@ -28,6 +27,7 @@ void GtkOutputter::initializeDevice(int* argc, char*** argv) {
     gtk_main();
 }
 
+////////////////////////////////////////////////////////////////////////////////
 void GtkOutputter::createWindow() {
     window_ = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window_), "xfd");

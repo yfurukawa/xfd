@@ -15,6 +15,8 @@ public:
 	IOutputter(){};
 	virtual ~IOutputter(){};
 	virtual void outputContents( std::string outputName, std::string contents ) = 0;
+	virtual std::string getDeviceName() = 0;
+	virtual void initializeDevice() = 0;
 };
 
 #endif /* IOUTPUTTER_H_ */

@@ -10,8 +10,8 @@
 #define ON 1
 #define OFF 0
 
-GpioOutputter::GpioOutputter(std::string name) : portNumber_(5) {
-    initializeDevice(name);
+GpioOutputter::GpioOutputter(std::string name) : portNumber_(5), deviceName_(name) {
+//    initializeDevice(name);
 }
 
 GpioOutputter::~GpioOutputter() {
@@ -27,13 +27,13 @@ void GpioOutputter::outputContents(std::string outputName,
     }
 }
 
-void GpioOutputter::initializeDevice(const std::string& name) {
+void GpioOutputter::initializeDevice() {
     if( wiringPiSetupGpio() == -1) {
         throw OutputDeviceException("GPIO");
     }
     std::string device("");
     std::string port("");
-    util::split(name, ':', device, port);
+    util::split(deviceName_, ':', device, port);
     portNumber_ = util::stringToInt(port);
     pinMode(portNumber_, OUTPUT);
 }
