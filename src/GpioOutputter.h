@@ -37,7 +37,7 @@ class GpioOutputter : public IOutputter {
         void initializeDevice(const std::string& name);
     private:
         //! コンストラクタ
-        GpioOutputter() {};
+        GpioOutputter() : portNumber_(5) {};
         int portNumber_;
 };
 

@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     else {
         conductor_ = new Conductor();
     }
-    conductor_->execute();
+    conductor_->execute(&argc, &argv);
 
     delete conductor_;
     return 0;

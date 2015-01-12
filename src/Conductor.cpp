@@ -10,6 +10,8 @@
 #include "JobResultChecker.h"
 #include "NetworkDAO.h"
 #include "NetworkException.h"
+#include "IOutputter.h"
+#include "GtkOutputter.h"
 
 Conductor::Conductor() : configurator_(NULL), checkInterval_(0), baseUrl_(""), bufferLength_byte_(1024),
     configFile_("/usr/local/etc/xfd.conf") {
@@ -19,8 +21,11 @@ Conductor::Conductor(const std::string& configFile) : configurator_(NULL), check
     configFile_(configFile) {
 }
 
-void Conductor::execute() {
+void Conductor::execute(int* argc, char*** argv) {
 
+    IOutputter* outputter;
+    outputter = new GtkOutputter(argc, argv);
+    outputter->outputContents("", "success");
     try {
         initializeConfiguration();
     }

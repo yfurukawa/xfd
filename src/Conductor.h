@@ -27,7 +27,8 @@ public:
     //! デストラクタ
     virtual ~Conductor();
     //! 監視を実行する
-    void execute();
+    void execute(int* argc, char*** argv);
+    //!
 
 protected:
     //! 設定を読み込む
