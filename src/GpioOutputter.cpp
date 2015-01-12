@@ -18,11 +18,22 @@ GpioOutputter::~GpioOutputter() {
 
 void GpioOutputter::outputContents(std::string outputName,
         std::string contents) {
+//    pthread_t threadId(0);
+//
+//    if(threadId ==0) {
+//        pthread_create(&threadId, NULL, &GpioOutputter::run, NULL);
+//    }
+
     if(contents == "success") {
         digitalWrite(portNumber_, OFF );
     }
     else {
-        digitalWrite(portNumber_, ON );
+        while(1){
+                digitalWrite(portNumber_, ON);
+                delay(500);
+                digitalWrite(portNumber_, OFF);
+                delay(500);
+        }
     }
 }
 
@@ -35,4 +46,16 @@ void GpioOutputter::initializeDevice() {
     util::split(deviceName_, ':', device, port);
     portNumber_ = util::stringToInt(port);
     pinMode(portNumber_, OUTPUT);
+
+    pthread_t threadId(0);
+
+    if(threadId ==0) {
+        pthread_create(&threadId, NULL, &GpioOutputter::run, NULL);
+    }
+}
+
+
+void* GpioOutputter::run(void* pParameter) {
+
+    return 0;
 }

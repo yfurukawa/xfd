@@ -10,6 +10,8 @@
 #include <string>
 #include "IOutputter.h"
 
+enum status {ON, OFF};
+
 class GpioOutputter : public IOutputter {
     public:
         //! コンストラクタ
@@ -39,7 +41,12 @@ class GpioOutputter : public IOutputter {
          * GPIOを初期化する。デバイスの初期化に失敗した場合は例外をスローする。
          * \exception 初期化に失敗したデバイス
          */
-    virtual void initializeDevice();
+        virtual void initializeDevice();
+
+    protected:
+
+        //! マルチスレッド用呼出メソッド
+        static void* run(void* pParameter);
 
     private:
         //! コンストラクタ
