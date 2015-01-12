@@ -12,8 +12,8 @@
 
 class IOutputter {
 public:
-	IOutputter();
-	virtual ~IOutputter();
+	IOutputter(){};
+	virtual ~IOutputter(){};
 	virtual void outputContents( std::string outputName, std::string contents ) = 0;
 };
 
