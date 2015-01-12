@@ -34,10 +34,10 @@ void Conductor::execute() {
         try{
             result = tallyJobResult();
             if(result) {
-                std::cout << "Success" << std::endl;
+                std::cout << "success" << std::endl;
               }
             else {
-                std::cout << "Broken" << std::endl;
+                std::cout << "fail" << std::endl;
               }
             sleep(checkInterval_);
          }

@@ -3,7 +3,7 @@ RM = rm -f
 JSON_C_DIR = /usr/local
 INCLUDE = -I/usr/incude -I/usr/local/include -I. -I$(JSON_C_DIR)/include
 LIB_DIR = -L/usr/lib64 -L/usr/local/lib64 -L$(JSON_C_DIR)/lib
-LIB = -lpthread -ljson-c
+LIB = -lpthread -ljson-c -lwiringPi
 OPT = -O0 -g3 -Wall -fmessage-length=0 -pg -fprofile-arcs -ftest-coverage
 TARGET = xfd
 include productionSources.mk
