@@ -10,7 +10,10 @@
 #define ON 1
 #define OFF 0
 
-GpioOutputter::GpioOutputter(std::string name) : portNumber_(5), deviceName_(name) {
+int GpioOutputter::portNumber_ = 21;
+enum status GpioOutputter::status_ = SUCCESS;
+
+GpioOutputter::GpioOutputter(std::string name) : deviceName_(name) {
 }
 
 GpioOutputter::~GpioOutputter() {
@@ -18,21 +21,18 @@ GpioOutputter::~GpioOutputter() {
 
 void GpioOutputter::outputContents(std::string outputName,
         std::string contents) {
-//    pthread_t threadId(0);
-//
-//    if(threadId ==0) {
-//        pthread_create(&threadId, NULL, &GpioOutputter::run, NULL);
-//    }
 
     if(contents == "success") {
-        digitalWrite(portNumber_, OFF );
+//        digitalWrite(portNumber_, OFF );
+        status_ = SUCCESS;
     }
     else {
         while(1){
-                digitalWrite(portNumber_, ON);
-                delay(500);
-                digitalWrite(portNumber_, OFF);
-                delay(500);
+//                digitalWrite(portNumber_, ON);
+//                delay(500);
+//                digitalWrite(portNumber_, OFF);
+//                delay(500);
+            status_ = FAIL;
         }
     }
 }
@@ -56,6 +56,16 @@ void GpioOutputter::initializeDevice() {
 
 
 void* GpioOutputter::run(void* pParameter) {
-
+    while(true) {
+        if(status_ == SUCCESS) {
+            digitalWrite(portNumber_, OFF );
+        }
+        else {
+            digitalWrite(portNumber_, ON);
+            delay(500);
+            digitalWrite(portNumber_, OFF);
+            delay(500);
+        }
+    }
     return 0;
 }

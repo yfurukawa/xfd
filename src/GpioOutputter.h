@@ -10,7 +10,7 @@
 #include <string>
 #include "IOutputter.h"
 
-enum status {ON, OFF};
+enum status {SUCCESS, FAIL};
 
 class GpioOutputter : public IOutputter {
     public:
@@ -50,9 +50,11 @@ class GpioOutputter : public IOutputter {
 
     private:
         //! コンストラクタ
-        GpioOutputter() : portNumber_(5), deviceName_("GPIO") {};
-        int portNumber_;
+        GpioOutputter() : deviceName_("GPIO") {};
+        static int portNumber_;
         std::string deviceName_;
+
+        static enum status status_;
 };
 
 #endif  // GPIOOUTPUTTER_H_
