@@ -51,8 +51,9 @@ class GpioOutputter : public IOutputter {
     private:
         //! コンストラクタ
         GpioOutputter() : deviceName_("GPIO") {};
-        static int portNumber_;
-        std::string deviceName_;
+        static int portNumber_;  //!< 出力用GPIOポート番号
+        std::string deviceName_; //!< デバイス名
+        static bool isFailConditionContinue_;  //!< 失敗状態が継続している事を示すフラグ
 
         static enum status status_;
 };

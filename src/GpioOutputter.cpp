@@ -1,7 +1,7 @@
 /*
  * Copyright
  *
-*/
+ */
 #include "wiringPi.h"
 #include "GpioOutputter.h"
 #include "OutputDeviceException.h"
@@ -12,6 +12,7 @@
 
 int GpioOutputter::portNumber_ = 21;
 enum status GpioOutputter::status_ = SUCCESS;
+bool GpioOutputter::isFailConditionContinue_ = false;
 
 GpioOutputter::GpioOutputter(std::string name) : deviceName_(name) {
 }
@@ -23,17 +24,12 @@ void GpioOutputter::outputContents(std::string outputName,
         std::string contents) {
 
     if(contents == "success") {
-//        digitalWrite(portNumber_, OFF );
         status_ = SUCCESS;
+        isFailConditionContinue_ = false;
     }
     else {
-        while(1){
-//                digitalWrite(portNumber_, ON);
-//                delay(500);
-//                digitalWrite(portNumber_, OFF);
-//                delay(500);
-            status_ = FAIL;
-        }
+        status_ = FAIL;
+        isFailConditionContinue_ = true;
     }
 }
 
@@ -60,11 +56,13 @@ void* GpioOutputter::run(void* pParameter) {
         if(status_ == SUCCESS) {
             digitalWrite(portNumber_, OFF );
         }
-        else {
-            digitalWrite(portNumber_, ON);
-            delay(500);
-            digitalWrite(portNumber_, OFF);
-            delay(500);
+        else if ( !isFailConditionContinue_ ) {
+            for(int ringingTimes = 0; ringingTimes < 3; ++ringingTimes) {
+                digitalWrite(portNumber_, ON);
+                delay(500);
+                digitalWrite(portNumber_, OFF);
+                delay(500);
+            }
         }
     }
     return 0;
