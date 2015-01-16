@@ -29,7 +29,6 @@ void GpioOutputter::outputContents(std::string outputName,
     }
     else {
         status_ = FAIL;
-        isFailConditionContinue_ = true;
     }
 }
 
@@ -63,6 +62,7 @@ void* GpioOutputter::run(void* pParameter) {
                 digitalWrite(portNumber_, OFF);
                 delay(500);
             }
+            isFailConditionContinue_ = true;
         }
     }
     return 0;
