@@ -55,8 +55,8 @@ void* GpioOutputter::run(void* pParameter) {
         if(status_ == SUCCESS) {
             digitalWrite(portNumber_, OFF );
         }
-        else if ( !isFailConditionContinue_ ) {
-            for(int ringingTimes = 0; ringingTimes < 3; ++ringingTimes) {
+        else if ( (!isFailConditionContinue_) && (status_ != SUCCESS) ) {
+            for(int ringingTimes = 0; ringingTimes < 5; ++ringingTimes) {
                 digitalWrite(portNumber_, ON);
                 delay(500);
                 digitalWrite(portNumber_, OFF);
