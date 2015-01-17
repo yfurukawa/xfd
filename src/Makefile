@@ -4,7 +4,7 @@ JSON_C_DIR = /usr/local
 INCLUDE = -I/usr/incude -I/usr/local/include -I. -I$(JSON_C_DIR)/include `pkg-config --cflags gtk+-3.0`
 LIB_DIR = -L/usr/lib64 -L/usr/local/lib64 -L$(JSON_C_DIR)/lib `pkg-config --libs gtk+-3.0`
 LIB = -lpthread -ljson-c -lwiringPi
-OPT = -O0 -g3 -Wall -fmessage-length=0 -pg -fprofile-arcs -ftest-coverage
+OPT = -O3 -g0 -Wall
 TARGET = xfd
 include productionSources.mk
 
@@ -20,6 +20,10 @@ main.o: main.cpp
 clean:
 	$(RM) *.o $(TARGET) $(TEST_TARGET) gmon.out *.gc* *.xml *.exe *.txt Fuga.cpp Hoge.cpp
 
+install:
+	cp xfd /usr/local/bin
+	cp xfd.sh /etc/init.d
+	chmod +x /etc/init.d/xfd.sh
 
 TEST_TARGET = xfdTest
 TEST_INCLUDE = -I../test -I.
