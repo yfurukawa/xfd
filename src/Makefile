@@ -5,7 +5,7 @@ INCLUDE = -I/usr/incude -I/usr/local/include -I. -I$(JSON_C_DIR)/include `pkg-co
 LIB_DIR = -L/usr/lib64 -L/usr/local/lib64 -L$(JSON_C_DIR)/lib `pkg-config --libs gtk+-3.0`
 LIB = -lpthread -ljson-c -lwiringPi
 OPT = -O0 -g3 -Wall
-TARGET = xfd
+TARGET = xfdd
 include productionSources.mk
 
 all: $(SRC:.cpp=.o) main.o
