@@ -2,8 +2,9 @@
  * Copyright
  *
  */
-//#include <gtk/gtk.h>
+#include <gtk/gtk.h>
 #include <pthread.h>
+#include <iostream>
 #include "./GtkOutputter.h"
 
 int GtkOutputter::width_(320);
@@ -70,6 +71,7 @@ gboolean GtkOutputter::draw_canvas(GtkWidget* widget, cairo_t* cr,
 }
 
 void* GtkOutputter::run(void* pParameter) {
+    std::cout << std::hex << pthread_self() << std::endl;
     gtk_main();
     return 0;
 }

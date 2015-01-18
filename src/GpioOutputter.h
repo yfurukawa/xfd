@@ -9,8 +9,8 @@
 
 #include <string>
 #include "IOutputter.h"
+#include "definition.h"
 
-enum status {SUCCESS, FAIL};
 
 class GpioOutputter : public IOutputter {
     public:

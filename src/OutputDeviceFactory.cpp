@@ -5,6 +5,7 @@
 #include "./OutputDeviceFactory.h"
 #include "GpioOutputter.h"
 #include "GtkOutputter.h"
+//#include "GpioContinuousOutputter.h"
 
 OutputDeviceFactory::~OutputDeviceFactory() {
 }

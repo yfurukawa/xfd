@@ -3,26 +3,21 @@
  *
  */
 #include "wiringPi.h"
-#include "GpioOutputter.h"
+#include "GpioContinuousOutputter.h"
 #include "OutputDeviceException.h"
 #include "utility.h"
-//
-//#define ON 1
-//#define OFF 0
 
-int GpioOutputter::portNumber_ = 21;
-enum status GpioOutputter::status_ = SUCCESS;
-bool GpioOutputter::isFailConditionContinue_ = false;
 
-GpioOutputter::GpioOutputter(std::string name) : deviceName_(name) {
+int GpioContinuousOutputter::portNumber_ = 21;
+enum status GpioContinuousOutputter::status_ = SUCCESS;
+bool GpioContinuousOutputter::isFailConditionContinue_ = false;
+
+
+GpioContinuousOutputter::GpioContinuousOutputter(std::string name) : deviceName_(name) {
 }
 
-GpioOutputter::~GpioOutputter() {
-}
-
-void GpioOutputter::outputContents(std::string outputName,
+void GpioContinuousOutputter::outputContents(std::string outputName,
         std::string contents) {
-
     if(contents == "success") {
         status_ = SUCCESS;
         isFailConditionContinue_ = false;
@@ -32,7 +27,11 @@ void GpioOutputter::outputContents(std::string outputName,
     }
 }
 
-void GpioOutputter::initializeDevice() {
+GpioContinuousOutputter::~GpioContinuousOutputter() {
+}
+
+
+void GpioContinuousOutputter::initializeDevice() {
     if( wiringPiSetupGpio() == -1) {
         throw OutputDeviceException("GPIO");
     }
@@ -45,24 +44,16 @@ void GpioOutputter::initializeDevice() {
     pthread_t threadId(0);
 
     if(threadId ==0) {
-        pthread_create(&threadId, NULL, &GpioOutputter::run, NULL);
+        pthread_create(&threadId, NULL, &GpioContinuousOutputter::run, NULL);
     }
 }
 
-
-void* GpioOutputter::run(void* pParameter) {
+void* GpioContinuousOutputter::run(void* pParameter) {
     while(true) {
         if(status_ == SUCCESS) {
             digitalWrite(portNumber_, OFF );
         }
         else if ( (!isFailConditionContinue_) && (status_ != SUCCESS) ) {
-//            for(int ringingTimes = 0; ringingTimes < 5; ++ringingTimes) {
-//                digitalWrite(portNumber_, ON);
-//                delay(500);
-//                digitalWrite(portNumber_, OFF);
-//                delay(500);
-//            }
-//            isFailConditionContinue_ = true;
             digitalWrite(portNumber_, ON);
             delay(5000);
             digitalWrite(portNumber_, OFF);
