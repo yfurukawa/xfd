@@ -4,24 +4,24 @@
  *
  */
 
-#ifndef GTKOUTPUTTER_H_
-#define GTKOUTPUTTER_H_
+#ifndef GTK3OUTPUTTER_H_
+#define GTK3OUTPUTTER_H_
 
 #include <gtk/gtk.h>
 #include <string>
 #include "IOutputter.h"
 
-class GtkOutputter : public IOutputter{
+class Gtk3Outputter : public IOutputter{
     public:
         //! コンストラクタ
         /**
          * \param[in] argc コマンドライン引数
          * \param[in] argv コマンドライン引数
          */
-        GtkOutputter(int* argc, char*** argv);
+        Gtk3Outputter(int* argc, char*** argv);
 
         //! デストラクタ
-        virtual ~GtkOutputter();
+        virtual ~Gtk3Outputter();
 
         //! ジョブの結果を出力する
         /**
@@ -68,7 +68,7 @@ class GtkOutputter : public IOutputter{
         static void* run(void* pParameter);
     private:
         //! コンストラクタ
-        GtkOutputter() : window_(NULL), canvas_(NULL), argc_(NULL), argv_(NULL) {};
+        Gtk3Outputter() : window_(NULL), canvas_(NULL), argc_(NULL), argv_(NULL) {};
 
         GtkWidget* window_; //!< gtkのウィンドウ
         GtkWidget* canvas_; //!< 表示キャンバス

@@ -24,9 +24,9 @@ void Conductor::execute(int* argc, char*** argv) {
 
     try {
         initializeConfiguration();
-        OutputDeviceFactory& deviceFactory = OutputDeviceFactory::getInstance();
-        deviceFactory.setCommandLineArguments(argc, argv);
-        outputter_ = deviceFactory.getOutputterList(outputDeviceList_);
+        OutputDeviceFactory* deviceFactory = OutputDeviceFactory::getInstance();
+        deviceFactory->setCommandLineArguments(argc, argv);
+        outputter_ = deviceFactory->getOutputterList(outputDeviceList_);
 
         for(std::vector<IOutputter*>::iterator iter = outputter_.begin(); iter != outputter_.end(); ++iter) {
             (*iter)->initializeDevice();
