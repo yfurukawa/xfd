@@ -53,33 +53,36 @@ protected:
      */
     void createWindow();
 
+    void createTable();
+
     //! gtkの表示キャンバスを準備する
     /**
      * ウィンドウ内にジョブの結果を表示するキャンバスを準備する
      */
-    void createCanvas();
+    void createErrorDialog();
 
     //! 表示画面を描画する
     /**
      * jenkinsジョブの結果に対応した表示画面を描画する
      */
-//    static gboolean draw_canvas(GtkWidget* widget, cairo_t* cr, gpointer data);
+    static void showError(GtkWidget* widget, gpointer data);
 
     //! マルチスレッド用呼出メソッド
     static void* run(void* pParameter);
 private:
     //! コンストラクタ
-    Gtk2Outputter() :/* window_(NULL), canvas_(NULL),*/ argc_(NULL), argv_(NULL) {};
+    Gtk2Outputter() : /*window_(NULL), error_(NULL),*/table_(NULL), argc_(NULL), argv_(NULL) {};
 
-    /*
-    GtkWidget* window_; //!< gtkのウィンドウ
-    GtkWidget* canvas_; //!< 表示キャンバス
+
+    static GtkWidget* window_; //!< gtkのウィンドウ
+    static GtkWidget* error_; //!< 表示キャンバス
+    GtkWidget* table_;
     static int width_; //!< キャンバスの横幅[pixel]
     static int hight_; //!< キャンバスの縦幅[pixel]
-    static GdkRGBA colorSuccess_; //!< ジョブ成功時の表示色（緑）
-    static GdkRGBA colorFail_; //!< ジョブ失敗時の表示色（赤）
-    static GdkRGBA currentColor_; //!< 現在の表示色
-*/
+//    static GdkRGBA colorSuccess_; //!< ジョブ成功時の表示色（緑）
+//    static GdkRGBA colorFail_; //!< ジョブ失敗時の表示色（赤）
+//    static GdkRGBA currentColor_; //!< 現在の表示色
+
     int* argc_;
     char*** argv_;
 
