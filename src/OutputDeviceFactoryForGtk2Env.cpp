@@ -26,7 +26,7 @@ OutputDeviceFactoryForGtk2Env::~OutputDeviceFactoryForGtk2Env() {
 std::vector<IOutputter*> OutputDeviceFactoryForGtk2Env::getOutputterList(std::vector<std::string> deviceType) const {
     std::vector<IOutputter*> outputter;
     for(std::vector<std::string>::iterator iter = deviceType.begin(); iter != deviceType.end(); ++iter) {
-        if(*iter == "gtk") {
+        if(*iter == "gtk2") {
             outputter.push_back(new Gtk2Outputter(argc_, argv_));
         }
 //        else if((*iter).find("GPIO", 0) != std::string::npos) {

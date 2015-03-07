@@ -79,6 +79,7 @@ private:
     GtkWidget* table_;
     static int width_; //!< キャンバスの横幅[pixel]
     static int hight_; //!< キャンバスの縦幅[pixel]
+    static GdkColor bgColor_; //! <
 //    static GdkRGBA colorSuccess_; //!< ジョブ成功時の表示色（緑）
 //    static GdkRGBA colorFail_; //!< ジョブ失敗時の表示色（赤）
 //    static GdkRGBA currentColor_; //!< 現在の表示色
