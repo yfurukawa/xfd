@@ -29,9 +29,9 @@ std::vector<IOutputter*> OutputDeviceFactoryForGtk2Env::getOutputterList(std::ve
         if(*iter == "gtk2") {
             outputter.push_back(new Gtk2Outputter(argc_, argv_));
         }
-//        else if((*iter).find("GPIO", 0) != std::string::npos) {
-//            outputter.push_back(new GpioOutputter(*iter));
-//        }
+        else if((*iter).find("GPIO", 0) != std::string::npos) {
+            outputter.push_back(new GpioOutputter(*iter));
+        }
     }
     return outputter;
 }
