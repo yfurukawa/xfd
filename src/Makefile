@@ -3,7 +3,7 @@ RM = rm -f
 JSON_C_DIR = /usr/local
 INCLUDE = -I/usr/incude -I/usr/local/include -I. -I$(JSON_C_DIR)/include `pkg-config --cflags gtk+-2.0`
 LIB_DIR = -L/usr/lib64 -L/usr/local/lib64 -L$(JSON_C_DIR)/lib `pkg-config --libs gtk+-2.0`
-LIB = -lpthread -ljson-c
+LIB = -lpthread -ljson-c -lwiringPi
 OPT = -O0 -g3 -Wall
 TARGET = xfdd
 include productionSourcesGtk2Env.mk
